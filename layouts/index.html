@@ -8,14 +8,12 @@
 
 {{ .Content }}
 
-<h2>{{ .Site.Params.main.latestPublishHeader | default "My Latest Job" }}</h2>
+<h2>{{ .Site.Params.main.latestPublishHeader | default "My Latest Projects" }}</h2>
+<div class="portfolio-list">
   {{ $pages := where site.RegularPages "Type" "in" .Site.Params.mainSections }}
-  {{ range first 1 $pages }}
-    {{ if in .Site.Params.mainSections "portfolio" }}
-      {{ partial "portfolio/item" .}}
-    {{ else if in .Site.Params.mainSections "post" }}
-      {{ partial "post/item" .}}
-    {{ end }}
+  {{ range first 10 $pages }}
+    {{ partial "portfolio/item" . }}
   {{ end }}
+</div>
 
-{{ partial "footer" .}}
+<!-- {{ partial "footer" .}} -->
